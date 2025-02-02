@@ -7,18 +7,25 @@ let level = 0;
 let highScore = 0; 
 
 let h2 = document.querySelector("h2");
-let highScoreDisplay = document.createElement("h3"); 
-highScoreDisplay.innerText = `High Score: ${highScore}`;
-document.body.insertBefore(highScoreDisplay, document.querySelector(".btn-container")); 
+let highScoreDisplay = document.querySelector("#high-score");
 
+// Get the audio elements
+let startSound = document.getElementById("start-sound");
+let keypressSound = document.getElementById("keypress-sound");
+let gameOverSound = document.getElementById("gameover-sound");
+
+// Start game on key press
 document.addEventListener("keypress", function () {
   if (!started) {
     console.log("Game Started!");
     started = true;
+
+    // Play start sound
+    startSound.play();
+
     levelUP();
   }
 });
-
 
 function gameFlash(btn) {
   if (!btn) return;
@@ -26,13 +33,12 @@ function gameFlash(btn) {
   setTimeout(() => btn.classList.remove("flash"), 250);
 }
 
-
 function userFlash(btn) {
   btn.classList.add("userFlash");
   setTimeout(() => btn.classList.remove("userFlash"), 250);
 }
 
-
+// Level Up function
 function levelUP() {
   userSeq = []; 
   level++;
@@ -59,12 +65,15 @@ function checkAns() {
   if (userSeq[lastIdx] !== gameSeq[lastIdx]) {
     h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press any key to restart`;
 
-   
+    
+    gameOverSound.play();
+
     if (level > highScore) {
       highScore = level;
       highScoreDisplay.innerText = `High Score: ${highScore}`;
     }
 
+    // Make background red for 1s
     document.body.style.backgroundColor = "red";
     setTimeout(() => {
       document.body.style.backgroundColor = "white";
@@ -74,29 +83,31 @@ function checkAns() {
     return;
   }
 
- 
   if (userSeq.length === gameSeq.length) {
     setTimeout(levelUP, 1000);
   }
 }
 
-
+// Button click function
 function btnPress() {
   let btn = this;
   userFlash(btn);
   let userColor = btn.getAttribute("id"); 
   userSeq.push(userColor);
 
+  // Play key press sound
+  keypressSound.play();
+
   checkAns(); 
 }
 
-
+// Add event listeners to buttons
 let allBtns = document.querySelectorAll(".btn");
 allBtns.forEach((btn) => {
   btn.addEventListener("click", btnPress);
 });
 
-
+// Reset function
 function reset() {
   started = false;
   gameSeq = [];

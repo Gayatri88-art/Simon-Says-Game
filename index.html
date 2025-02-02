@@ -8,8 +8,11 @@
 </head>
 <body>
 <h1>Simon Says Game</h1>
-<h2>press any key to start the game</h2>
-<div class="btn-container" >
+<h2>Press any key to start the game</h2>
+
+<h3 id="high-score">High Score: 0</h3>
+
+<div class="btn-container">
   <div class="line-one">
     <div class="btn red" type="button" id="red">1</div>
     <div class="btn yellow" type="button" id="yellow">2</div>
@@ -18,9 +21,13 @@
     <div class="btn green" type="button" id="green">3</div>
     <div class="btn purple" type="button" id="purple">4</div>
   </div>
- 
 </div>
 
-  <script src="app.js"></script>
+<!-- Add audio elements -->
+<audio id="start-sound" src="sounds/success-fanfare-trumpets-6185.mp3"></audio>
+<audio id="keypress-sound" src="sounds/key-press-263640.mp3"></audio>
+<audio id="gameover-sound" src="sounds/mixkit-funny-game-over-2878.wav"></audio>
+
+<script src="app.js"></script>
 </body>
 </html>
