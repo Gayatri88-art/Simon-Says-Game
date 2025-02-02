@@ -1,6 +1,22 @@
 body {
   text-align: center;
   font-family: Arial, sans-serif;
+  
+}
+.high-score-container {
+  background-color: rgb(246, 170, 216);
+  border-style: dotted;
+  border-radius: 10px;
+  width: 150px;  /* Adjust width if needed */
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+
+  /* Centering */
+  margin: 20px auto; /* Centers the div horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn {
